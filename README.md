@@ -3,6 +3,7 @@
 ###Development
 
 ```bash
+npm install
 make dev-server
 ```
 

@@ -12,7 +12,7 @@ help:
 
 
 dev-server:
-	@supervisor --ignore frontend server/index.js | /usr/local/bin/bunyan
+	@supervisor --ignore frontend server/index.js | bunyan
 
 
 frontend:

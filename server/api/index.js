@@ -1,12 +1,12 @@
-import requireindex from 'es6-requireindex'
-import debug from 'debug'
-import convert from 'koa-convert'
-import router from 'koa-joi-router'
-import { forEach } from 'lodash'
+const requireindex = require('es6-requireindex')
+const debug = require('debug')
+const convert = require('koa-convert')
+const router = require('koa-joi-router')
+const { forEach } = require('lodash')
 
 const resouces = requireindex(__dirname, { recursive: false })
 
-export default function api (app) {
+module.exports = function api (app) {
   forEach(resouces, ({ prefix, routes }) => {
     const pfix = `/api${prefix}`
     const rtr = router()

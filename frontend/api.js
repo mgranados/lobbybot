@@ -1,7 +1,5 @@
 import request from 'superagent'
 
-const apiUrl = process.env.API_URL
-
 export default {
   get (endpoint) {
     return this.request('get', endpoint)
@@ -20,7 +18,7 @@ export default {
   },
 
   request (method, endpoint, data) {
-    const url = `${apiUrl}${endpoint}`
+    const url = `/api${endpoint}`
 
     return new Promise((resolve, reject) => {
       const req = request[method](url)

@@ -1,2 +1,2 @@
-import requireindex from 'es6-requireindex'
-export default requireindex(__dirname)
+
+module.exports = require('es6-requireindex')(__dirname)

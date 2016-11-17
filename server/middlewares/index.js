@@ -1,5 +1,2 @@
-import errorHandler from './errorHandler'
-export { errorHandler }
 
-import render from './render'
-export { render }
+module.exports = require('es6-requireindex')(__dirname)

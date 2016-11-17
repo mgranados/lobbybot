@@ -1,33 +1,33 @@
-import Koa from 'koa'
-import logger from 'koa-logger'
-import mount from 'koa-mount'
-import serve from 'koa-static'
-import api from './api'
-import { errorHandler, render } from './middlewares'
-import config from '../config'
+const Koa = require('koa')
+const logger = require('koa-logger')
+const mount = require('koa-mount')
+const serve = require('koa-static')
+const convert = require('koa-convert')
+const api = require('./api')
+const nunjucks = require('nunjucks')
+const views = require('yet-another-nunjucks-koa-render')
+const { render, errorHandler } = require('./middlewares')
+const config = require('../config')
 
-const { env, webpack } = config
+const { webpack, server } = config
 const app = new Koa()
 
+// View templates
+app.use(views(nunjucks.configure(`${__dirname}/views`, { noCache: true }), { ext: '.html' }))
+
 // Static files
-app.use(mount(webpack.publicPath, serve(webpack.outputPath, { defer: false })))
+app.use(mount(server.static, serve(webpack.outputPath, { defer: false })))
 
 // Logger
-if (env !== 'test') {
-  app.use(logger())
-}
+app.use(logger())
 
 // Error handler
-app.use(errorHandler)
+app.use(convert(errorHandler))
 
 // api
 api(app)
 
 // frontend
-if (env === 'development') {
-  require('../webpack/server').default(app)
-} else {
-  app.use(render)
-}
+app.use(convert(render))
 
-export default app
+module.exports = app

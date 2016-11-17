@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { User } from '../../src/server/models'
+import User from '../../server/models/User'
 import { clearDatabase } from '../utils'
 
 describe('user', () => {

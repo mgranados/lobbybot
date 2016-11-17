@@ -5,6 +5,7 @@
 ```bash
 npm install
 make dev-server
+make frontend
 ```
 
 ###Production

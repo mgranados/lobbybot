@@ -1,2 +1,2 @@
-import * as token from './token'
-export { token }
+
+module.exports = require('es6-requireindex')(__dirname)

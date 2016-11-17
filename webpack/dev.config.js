@@ -1,20 +1,19 @@
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
-const config = require('../config')
+const config = require('../config').webpack
 
 module.exports = {
   devtool: 'eval',
   entry: [
     'react-hot-loader/patch',
-    'webpack-hot-middleware/client',
+    `webpack-dev-server/client?${config.clientUrl}`,
+    'webpack/hot/only-dev-server',
     './frontend/index.js'
   ],
   output: {
-    path: config.webpack.outputPath,
-    filename: 'bundle.js',
-    publicPath: config.webpack.publicPath
+    path: config.outputPath,
+    filename: config.outputFilename,
+    publicPath: config.outputPublicPath
   },
   module: {
     loaders: [
@@ -25,7 +24,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
+        loaders: ['style', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader']
       }
     ]
   },
@@ -33,18 +32,10 @@ module.exports = {
     autoprefixer({ browsers: ['last 2 versions'] })
   ],
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify({
-        NODE_ENV: process.env.NODE_ENV,
-        API_URL: process.env.API_URL
+        NODE_ENV: process.env.NODE_ENV
       })
-    }),
-    new ExtractTextPlugin('app.css'),
-    new HtmlWebpackPlugin({
-      template: 'frontend/index.html',
-      filename: 'index.html',
-      inject: 'body'
     })
   ]
 }

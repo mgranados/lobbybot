@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { clearDatabase, createUser } from '../utils'
-import app from '../../src/server/app'
+import app from '../../server/app'
 import request from 'supertest'
 
 describe('/sessions', () => {
@@ -16,11 +16,12 @@ describe('/sessions', () => {
       const user = await createUser({ password })
 
       agent
-        .post('/sessions')
+        .post('/api/sessions')
         .send({ password: '4321', email: user.email })
         .set('Accept', 'application/json')
         .expect(401)
         .end((err, res) => {
+
           if (err) return done(err)
           done()
         })
@@ -30,7 +31,7 @@ describe('/sessions', () => {
       const user = await createUser({ password })
 
       agent
-        .post('/sessions')
+        .post('/api/sessions')
         .send({ password, email: user.email })
         .set('Accept', 'application/json')
         .expect(200)

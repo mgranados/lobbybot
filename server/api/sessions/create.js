@@ -1,8 +1,8 @@
-import { Joi } from 'koa-joi-router'
-import { User } from '../../models'
-import { auth } from '../../lib'
+const Joi = require('koa-joi-router').Joi
+const User = require('../../models/User')
+const auth = require('../../lib/auth')
 
-export default {
+module.exports = {
   method: 'post',
   path: '/',
   validate: {

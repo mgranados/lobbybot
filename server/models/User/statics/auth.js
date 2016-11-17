@@ -1,13 +1,13 @@
-import assert from 'http-assert'
-import bcrypt from 'bcrypt'
+const assert = require('http-assert')
+const bcrypt = require('bcrypt')
 
-export default async function auth (email, password) {
+module.exports = function *auth (email, password) {
   const User = this
 
-  const user = await User.findOne({ email })
+  const user = yield User.findOne({ email })
   assert(user, 401)
 
-  const isValid = await new Promise((resolve, reject) => {
+  const isValid = yield new Promise((resolve, reject) => {
     bcrypt.compare(password, user.password, (err, compared) =>
       (err ? reject(err) : resolve(compared))
     )

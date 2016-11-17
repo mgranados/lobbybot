@@ -1,8 +1,8 @@
-export default async (ctx, next) => {
+module.exports = function * (next) {
   try {
-    await next()
+    yield next
   } catch (err) {
-    ctx.body = { message: err.message }
-    ctx.status = err.status || 500
+    this.body = { message: err.message }
+    this.status = err.status || 500
   }
 }

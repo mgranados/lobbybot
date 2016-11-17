@@ -1,2 +1,2 @@
-import * as auth from './auth'
-export { auth }
+
+module.exports = require('es6-requireindex')(__dirname)

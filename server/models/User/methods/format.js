@@ -1,4 +1,4 @@
-export default function format () {
+module.exports = function format () {
   return {
     id: this.id,
     name: this.name,

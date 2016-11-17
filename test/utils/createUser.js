@@ -1,4 +1,4 @@
-import { User } from '../../src/server/models'
+import { User } from '../../server/models'
 import { userFixture } from '../fixtures'
 
 export default async function createUser (opts = {}) {

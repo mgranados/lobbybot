@@ -4,4 +4,4 @@ require('babel-core/register')
 require('babel-polyfill')
 
 require('../config')
-require('../src/server/databases')
+require('../server/databases')

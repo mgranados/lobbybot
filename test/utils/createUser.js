@@ -1,6 +1,6 @@
-import { User } from '../../server/models'
-import { userFixture } from '../fixtures'
+const { User } = require('../../server/models')
+const { userFixture } = require('../fixtures')
 
-export default async function createUser (opts = {}) {
-  return await User.create({ ...userFixture, ...opts })
+module.exports = function *createUser (opts = {}) {
+  return yield User.create(Object.assign(opts, userFixture))
 }

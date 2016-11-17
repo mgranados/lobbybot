@@ -9,7 +9,7 @@ const views = require('yet-another-nunjucks-koa-render')
 const { render, errorHandler } = require('./middlewares')
 const config = require('../config')
 
-const { webpack, server } = config
+const { webpack, server, env } = config
 const app = new Koa()
 
 // View templates
@@ -19,7 +19,9 @@ app.use(views(nunjucks.configure(`${__dirname}/views`, { noCache: true }), { ext
 app.use(mount(server.static, serve(webpack.outputPath, { defer: false })))
 
 // Logger
-app.use(logger())
+if (env !== 'test') {
+  app.use(logger())
+}
 
 // Error handler
 app.use(convert(errorHandler))

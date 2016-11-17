@@ -1,7 +1,7 @@
-import { map } from 'lodash'
-import models from '../../server/models'
+const { map } = require('lodash')
+const models = require('../../server/models')
 
-export default function clearDatabase () {
+module.exports = function clearDatabase () {
   const promises = map(models, model => model.remove({}))
   return Promise.all(promises)
 }

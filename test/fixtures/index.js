@@ -1,2 +1,2 @@
-import userFixture from './userFixture'
-export { userFixture }
+
+module.exports = require('es6-requireindex')(__dirname)

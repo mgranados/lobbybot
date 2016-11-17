@@ -1,29 +1,30 @@
-import { expect } from 'chai'
-import User from '../../server/models/User'
-import { clearDatabase } from '../utils'
+const { expect } = require('chai')
+const User = require('../../server/models/User')
+const { clearDatabase } = require('../utils')
+
+require('co-mocha')
 
 describe('user', () => {
-  beforeEach(async () => {
-    await clearDatabase()
+  beforeEach(function *() {
+    yield clearDatabase()
   })
 
   describe('auth', () => {
     const email = 'user@app.com'
     const password = '1234'
 
-    it('should return a error 401', async () => {
-      await User.create({ email, password })
+    it('should return a error 401', function * () {
+      yield User.create({ email, password })
       try {
-        await User.auth(email, '4321')
+        yield User.auth(email, '4321')
       } catch (err) {
         expect(err.statusCode).equal(401)
       }
     })
 
-    it('should auth an user with correct credentials', async () => {
-      await User.create({ email, password })
-      const user = await User.auth(email, password)
-
+    it('should auth an user with correct credentials', function * () {
+      yield User.create({ email, password })
+      const user = yield User.auth(email, password)
       expect(user.email).equal(email)
     })
   })

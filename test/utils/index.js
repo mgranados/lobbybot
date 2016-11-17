@@ -1,5 +1,2 @@
-import clearDatabase from './clearDatabase'
-export { clearDatabase }
 
-import createUser from './createUser'
-export { createUser }
+module.exports = require('es6-requireindex')(__dirname)

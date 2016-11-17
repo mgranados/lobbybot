@@ -1,45 +1,46 @@
-import { expect } from 'chai'
-import { clearDatabase, createUser } from '../utils'
-import app from '../../server/app'
-import request from 'supertest'
+require('co-mocha')
+require('co-supertest')
+
+const { expect } = require('chai')
+const http = require('http')
+const { clearDatabase, createUser } = require('../utils')
+const app = require('../../server/app')
+const request = require('supertest')
+
+function test () {
+  return request(http.createServer(app.callback()))
+}
 
 describe('/sessions', () => {
-  const agent = request.agent(app.listen())
   const password = '1234'
 
-  beforeEach(async () => {
-    await clearDatabase()
+  beforeEach(function *() {
+    yield clearDatabase()
   })
 
   describe('post', () => {
-    it('should return a error', async (done) => {
-      const user = await createUser({ password })
+    it('should return a error', function *() {
+      const user = yield createUser({ password })
 
-      agent
+      yield test()
         .post('/api/sessions')
         .send({ password: '4321', email: user.email })
         .set('Accept', 'application/json')
         .expect(401)
-        .end((err, res) => {
-
-          if (err) return done(err)
-          done()
-        })
+        .end()
     })
 
-    it('should create a session', async (done) => {
-      const user = await createUser({ password })
+    it('should create a session', function *() {
+      const user = yield createUser({ password })
 
-      agent
+      const res = yield test()
         .post('/api/sessions')
         .send({ password, email: user.email })
         .set('Accept', 'application/json')
         .expect(200)
-        .end((err, res) => {
-          if (err) return done(err)
-          expect(res.body.user.email).equal(user.email)
-          done()
-        })
+        .end()
+
+      expect(res.body.user.email).equal(user.email)
     })
   })
 })

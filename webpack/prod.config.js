@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const autoprefixer = require('autoprefixer')
 const config = require('../config').webpack
 
 module.exports = {
@@ -34,6 +33,13 @@ module.exports = {
             'postcss-loader'
           ]
         })
+      },
+      {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+          loader: ['css-loader', 'sass-loader'],
+          fallbackLoader: 'style-loader'
+        })
       }
     ]
   },
@@ -55,6 +61,9 @@ module.exports = {
     modules: [
       path.join(__dirname, 'frontend'),
       'node_modules'
-    ]
+    ],
+    alias: {
+      '~components': path.resolve(__dirname, '../frontend/components')
+    }
   }
 }

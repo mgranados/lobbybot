@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Paper from 'material-ui/Paper'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import CircularProgress from 'material-ui/CircularProgress'
 import { branch } from 'baobab-react/higher-order'
+import classNames from 'classnames/bind'
 import { create as createSession } from '../../actions/Session'
-import style from './style.css'
+import { Button } from '~components'
+import styles from './style.css'
+
+const cx = classNames.bind(styles)
 
 class Login extends Component {
   constructor () {
@@ -29,7 +29,7 @@ class Login extends Component {
     try {
       await dispatch(createSession, { email, password })
     } catch (err) {
-      this.setState({ errorText: 'Invalid e-mail or password', submitting: false })
+      this.setState({ errorMessage: 'Invalid e-mail or password', submitting: false })
       return
     }
 
@@ -40,38 +40,39 @@ class Login extends Component {
   }
 
   render () {
-    const { submitting, errorText } = this.state
+    const { errorMessage } = this.state
 
     return (
-      <div className={style.Page}>
-        <div className={style.Content}>
-          <Paper style={{ width: 450, maxWidth: '100vw' }}>
-            <div style={{ maxWidth: 400, padding: 20, margin: 'auto' }}>
-              <p style={{ color: 'rgba(0,0,0,.54)', textAlign: 'center' }}>Sign in with your e-mail</p>
-              <TextField
-                hintText='E-mail'
-                fullWidth
-                value={this.state.email}
-                errorText={errorText}
-                onChange={(event) => this.setState({ email: event.target.value })}
-              />
-              <TextField
-                hintText='Password'
-                type='password'
-                fullWidth
-                value={this.state.password}
-                onChange={(event) => this.setState({ password: event.target.value })}
-              />
-              <div style={{ marginTop: 10, marginBottom: 10, textAlign: 'center' }}>
-                <RaisedButton label='Log in' secondary onClick={this.handleSubmit} />
-              </div>
-              <div style={{ textAlign: 'center' }}>
-                {submitting &&
-                  <CircularProgress />
-                }
-              </div>
-            </div>
-          </Paper>
+      <div className={styles.page}>
+        <div className={cx('box', 'form')}>
+          <h5 className='title is-5 has-text-centered'>Sign in with your e-mail</h5>
+
+          <p className='control'>
+            <input
+              className='input'
+              placeholder='E-mail'
+              value={this.state.email}
+              onChange={(event) => this.setState({ email: event.target.value })}
+            />
+          </p>
+
+          <p className='control'>
+            <input
+              className='input'
+              placeholder='Password'
+              type='password'
+              value={this.state.password}
+              onChange={(event) => this.setState({ password: event.target.value })}
+            />
+          </p>
+
+          {errorMessage &&
+            <span className='help is-danger has-text-centered'>{errorMessage} email is invalid</span>
+          }
+
+          <div style={{ textAlign: 'right' }}>
+            <Button primary onClick={this.handleSubmit}>Log in</Button>
+          </div>
         </div>
       </div>
     )

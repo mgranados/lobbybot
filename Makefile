@@ -12,7 +12,7 @@ help:
 
 
 dev-server:
-	@supervisor --ignore frontend server/index.js | bunyan
+	@$(BIN_DIR)/nodemon --ignore frontend server/index.js 
 
 
 frontend:

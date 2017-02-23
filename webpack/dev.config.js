@@ -1,5 +1,7 @@
 const webpack = require('webpack')
+const path = require('path')
 const autoprefixer = require('autoprefixer')
+const env = require('../config/env')
 const config = require('../config').webpack
 
 module.exports = {
@@ -16,26 +18,38 @@ module.exports = {
     publicPath: config.outputPublicPath
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel'],
-        exclude: /node_modules/
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader']
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+            }
+          },
+          'postcss-loader'
+        ]
       }
     ]
   },
-  postcss: [
-    autoprefixer({ browsers: ['last 2 versions'] })
-  ],
+  resolve: {
+    modules: [
+      path.join(__dirname, 'frontend'),
+      'node_modules'
+    ]
+  },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify({
-        NODE_ENV: process.env.NODE_ENV
-      })
+      NODE_ENV: env
     })
   ]
 }

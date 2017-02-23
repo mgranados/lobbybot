@@ -1,18 +1,14 @@
-.Page {
+.page {
   background: #eaeaea;
   font-family: Roboto;
   display: flex;
   width: 100vw;
   height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
-.Content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 300px;
-  max-width: 100vw;
-  margin: 0 auto;
-  margin-top: 200px;
+.form {
+  min-width: 400px;
+  margin-top: -100px;
 }

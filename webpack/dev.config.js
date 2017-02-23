@@ -1,6 +1,5 @@
 const webpack = require('webpack')
 const path = require('path')
-const autoprefixer = require('autoprefixer')
 const env = require('../config/env')
 const config = require('../config').webpack
 
@@ -38,6 +37,10 @@ module.exports = {
           },
           'postcss-loader'
         ]
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
@@ -45,7 +48,10 @@ module.exports = {
     modules: [
       path.join(__dirname, 'frontend'),
       'node_modules'
-    ]
+    ],
+    alias: {
+      '~components': path.resolve(__dirname, '../frontend/components')
+    }
   },
   plugins: [
     new webpack.DefinePlugin({

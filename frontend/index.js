@@ -1,13 +1,11 @@
 import 'babel-polyfill'
 import React from 'react'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 import { AppContainer } from 'react-hot-loader'
 import { render } from 'react-dom'
 import { browserHistory } from 'react-router'
 import Root from './components/Root'
 import './style/main.css'
-
-injectTapEventPlugin()
+import './style/style.scss'
 
 const rootEl = document.getElementById('app')
 

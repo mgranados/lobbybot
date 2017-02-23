@@ -1,10 +1,10 @@
 const webpack = require('webpack')
+const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 const config = require('../config').webpack
 
 module.exports = {
-  devtool: 'source-map',
   entry: './frontend/index.js',
   output: {
     path: config.outputPath,
@@ -14,32 +14,47 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ['babel']
+        loader: 'babel-loader'
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[path][name]__[local]--[hash:base64:5]'
+              }
+            },
+            'postcss-loader'
+          ]
+        })
       }
     ]
   },
-  postcss: [
-    autoprefixer({ browsers: ['last 2 versions'] })
-  ],
   plugins: [
-    new ExtractTextPlugin(config.cssFilename),
-    new webpack.DefinePlugin({
-      'process.env': JSON.stringify({
-        NODE_ENV: 'production'
-      })
+    new ExtractTextPlugin({
+      filename: config.cssFilename
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.DefinePlugin({
+      NODE_ENV: 'production'
+    }),
     new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
       compress: {
         warnings: false
       }
     })
-  ]
+  ],
+  resolve: {
+    modules: [
+      path.join(__dirname, 'frontend'),
+      'node_modules'
+    ]
+  }
 }

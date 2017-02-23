@@ -13,6 +13,7 @@ const clientUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`
 const useDist = env === 'production' || USE_DIST === 'true'
 
 module.exports = {
+  env,
   clientUrl,
   useDist,
   outputPublicPath: useDist ? WEBPACK_PUBLIC_PATH : `${clientUrl}${WEBPACK_PUBLIC_PATH}`,

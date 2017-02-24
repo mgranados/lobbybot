@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { branch } from 'baobab-react/higher-order'
 import classNames from 'classnames/bind'
-import { create as createSession } from '../../actions/Session'
+import { create as createSession } from '../../../actions/Session'
 import { Button } from '~components'
 import styles from './style.css'
 

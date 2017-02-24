@@ -1,28 +1,28 @@
 import 'babel-polyfill'
 import React from 'react'
 import { AppContainer } from 'react-hot-loader'
-import { render } from 'react-dom'
+import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
-import Root from './components/Root'
-import './style/main.css'
-import './style/style.scss'
+import './views/styles/styles.scss'
+import Root from './views/components/Root'
 
-const rootEl = document.getElementById('app')
+const rootElement = document.getElementById('app')
 
-render(
-  <AppContainer>
-    <Root history={browserHistory} />
-  </AppContainer>, rootEl
-)
+function render (Root) {
+  ReactDOM.render(
+    <AppContainer>
+      <Root
+        history={browserHistory}
+      />
+    </AppContainer>,
+    rootElement
+  )
+}
 
 if (module.hot) {
-  module.hot.accept('./components/Root', () => {
-    const NextRoot = require('./components/Root').default
-    render(
-      <AppContainer>
-        <NextRoot history={browserHistory} />
-      </AppContainer>,
-      rootEl
-    )
+  module.hot.accept('./views/components/Root', () => {
+    render(require('./views/components/Root').default)
   })
 }
+
+render(Root)

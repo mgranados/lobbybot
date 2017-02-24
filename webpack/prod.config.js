@@ -63,7 +63,7 @@ module.exports = {
       'node_modules'
     ],
     alias: {
-      '~components': path.resolve(__dirname, '../frontend/components')
+      '~components': path.resolve(__dirname, '../frontend/views/components')
     }
   }
 }

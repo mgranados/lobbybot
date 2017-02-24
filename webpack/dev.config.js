@@ -40,7 +40,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },
@@ -50,7 +54,7 @@ module.exports = {
       'node_modules'
     ],
     alias: {
-      '~components': path.resolve(__dirname, '../frontend/components')
+      '~components': path.resolve(__dirname, '../frontend/views/components')
     }
   },
   plugins: [

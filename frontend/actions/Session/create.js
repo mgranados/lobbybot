@@ -1,5 +1,5 @@
 import ls from 'local-storage'
-import api from '../../api'
+import api from '../../views/api'
 
 export default async function create (tree, body) {
   const { user, token } = await api.post('/sessions', body)

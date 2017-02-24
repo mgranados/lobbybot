@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import { branch } from 'baobab-react/higher-order'
+import Header from './header'
 
 class App extends Component {
   render () {
+    if (!this.props.isAuthenticated) {
+      return this.props.children
+    }
+
     return (
       <div style={{ height: '100%', flexDirection: 'column', display: 'flex' }}>
-        {this.props.children}
+        <Header />
+        <div className='container'>
+          {this.props.children}
+        </div>
       </div>
     )
   }

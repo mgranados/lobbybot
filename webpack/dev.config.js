@@ -48,18 +48,17 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    modules: [
-      path.join(__dirname, 'frontend'),
-      'node_modules'
-    ],
-    alias: {
-      '~components': path.resolve(__dirname, '../frontend/views/components')
-    }
-  },
   plugins: [
     new webpack.DefinePlugin({
-      NODE_ENV: env
+      'process.env': {
+        'NODE_ENV': JSON.stringify(env)
+      }
     })
-  ]
+  ],
+  resolve: {
+    modules: [
+      path.join(__dirname, '../frontend'),
+      'node_modules'
+    ]
+  }
 }

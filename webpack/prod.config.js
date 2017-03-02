@@ -48,7 +48,9 @@ module.exports = {
       filename: config.cssFilename
     }),
     new webpack.DefinePlugin({
-      NODE_ENV: 'production'
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
@@ -61,9 +63,6 @@ module.exports = {
     modules: [
       path.join(__dirname, 'frontend'),
       'node_modules'
-    ],
-    alias: {
-      '~components': path.resolve(__dirname, '../frontend/views/components')
-    }
+    ]
   }
 }

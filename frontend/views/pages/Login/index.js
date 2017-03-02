@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { branch } from 'baobab-react/higher-order'
+import { connect } from 'react-redux'
+import { createSelector } from 'reselect'
 import classNames from 'classnames/bind'
-import { create as createSession } from '../../../actions/Session'
-import { Button } from '~components'
+import { sessionActions, getSession } from 'core/session'
+import Button from 'views/components/Button'
 import styles from './style.css'
 
 const cx = classNames.bind(styles)
@@ -13,34 +14,18 @@ class Login extends Component {
 
     this.state = {
       email: '',
-      password: '',
-      submitting: false
+      password: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  async handleSubmit () {
-    const { email, password } = this.state
-    const { dispatch, location, router } = this.props
-
-    this.setState({ submitting: true, errorText: '' })
-
-    try {
-      await dispatch(createSession, { email, password })
-    } catch (err) {
-      this.setState({ errorMessage: 'Invalid e-mail or password', submitting: false })
-      return
-    }
-
-    const redirectUrl = location.state && location.state.nextPathname
-      ? location.state.nextPathname
-      : '/'
-    router.replace(redirectUrl)
+  handleSubmit () {
+    this.props.login(this.state)
   }
 
   render () {
-    const { errorMessage } = this.state
+    const { isLoading, errorText } = this.props
 
     return (
       <div className={styles.page}>
@@ -66,12 +51,12 @@ class Login extends Component {
             />
           </p>
 
-          {errorMessage &&
-            <span className='help is-danger has-text-centered'>{errorMessage} email is invalid</span>
-          }
+          {!errorText ? null : (
+            <span className='help is-danger has-text-centered'>{errorText} email is invalid</span>
+          )}
 
           <div style={{ textAlign: 'right' }}>
-            <Button primary onClick={this.handleSubmit}>Log in</Button>
+            <Button primary onClick={this.handleSubmit} loading={isLoading}>Log in</Button>
           </div>
         </div>
       </div>
@@ -79,4 +64,19 @@ class Login extends Component {
   }
 }
 
-export default branch({}, Login)
+const mapStateToProps = createSelector(
+  getSession,
+  session => ({
+    isLoading: session.isSending,
+    errorText: session.errorText
+  })
+)
+
+const mapDispatchToProps = {
+  login: sessionActions.login
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login)

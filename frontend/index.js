@@ -3,16 +3,20 @@ import React from 'react'
 import { AppContainer } from 'react-hot-loader'
 import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
+import configureStore from './core/store'
 import './views/styles/styles.scss'
-import Root from './views/components/Root'
+import Root from './views/root'
 
 const rootElement = document.getElementById('app')
-
-function render (Root) {
+const store = configureStore()
+const history = syncHistoryWithStore(browserHistory, store)
+const render = (Root) => {
   ReactDOM.render(
     <AppContainer>
       <Root
-        history={browserHistory}
+        history={history}
+        store={store}
       />
     </AppContainer>,
     rootElement
@@ -20,8 +24,8 @@ function render (Root) {
 }
 
 if (module.hot) {
-  module.hot.accept('./views/components/Root', () => {
-    render(require('./views/components/Root').default)
+  module.hot.accept('./views/root', () => {
+    render(require('./views/root').default)
   })
 }
 

@@ -1,13 +1,13 @@
 import React from 'react'
 import cx from 'classnames'
 
-export class Button extends React.Component {
+export default class Button extends React.Component {
   render () {
     const { props } = this
 
     const className = cx('button', {
       'is-primary': props.primary,
-      'is-loading': props.lading
+      'is-loading': props.loading
     })
 
     return (

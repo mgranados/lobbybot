@@ -1,7 +1,6 @@
-import { takeLatest } from 'redux-saga'
 import ls from 'local-storage'
 import { push } from 'react-router-redux'
-import { call, fork, put } from 'redux-saga/effects'
+import { call, fork, put, takeLatest } from 'redux-saga/effects'
 import { sessionActions } from './actions'
 import api from './api'
 

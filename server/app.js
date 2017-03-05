@@ -4,6 +4,7 @@ const mount = require('koa-mount')
 const serve = require('koa-static')
 const convert = require('koa-convert')
 const session = require('koa-generic-session')
+const flash = require('koa-flash')
 const redisStore = require('koa-redis')
 const nunjucks = require('nunjucks')
 const views = require('yet-another-nunjucks-koa-render')
@@ -27,6 +28,7 @@ app.use(convert(session({
     maxAge: 14 * 24 * 60 * 60 * 1000 // 14 days in ms
   }
 })))
+app.use(convert(flash()))
 
 // Logger
 if (env !== 'test') {
@@ -38,6 +40,7 @@ app.use(convert(errorHandler))
 
 // Routes
 app.use(require('./routes/public'))
+app.use(require('./routes/protected'))
 app.use(require('./routes/users'))
 
 // frontend

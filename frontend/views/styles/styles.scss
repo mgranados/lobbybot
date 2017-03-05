@@ -1,2 +1,18 @@
 @import '~bulma';
 @import './base.scss';
+
+.single-page{
+	margin: 100px auto 0;
+	max-width:760px;
+	padding: 0 50px;
+
+	h1{
+		font-size:40px;
+		padding-bottom:20px;
+	}
+
+	p{
+		font-size:24px;
+		padding-bottom:15px;
+	}
+}

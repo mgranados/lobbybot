@@ -11,6 +11,11 @@
 </head>
 <body>
   <div id="app" style="height: 100%;" />
+  {% if user %}
+    <script >
+      window.user = {{ user | safe }} 
+    </script>
+  {% endif %}
   <script type="text/javascript" src="{{outputPublicPath}}{{outputFilename}}"></script>
 </body>
 </html>

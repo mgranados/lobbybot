@@ -1,11 +1,7 @@
 import { sessionActions } from './actions'
-import ls from 'local-storage'
-
-const token = ls.get('token')
 
 export const initialState = {
-  loggedIn: token && token.length || false,
-  token
+  loggedIn: !!window.user
 }
 
 export function sessionReducer (state = initialState, { payload, type }) {
@@ -13,7 +9,13 @@ export function sessionReducer (state = initialState, { payload, type }) {
     case sessionActions.LOGIN_SUCCESS:
       return {
         ...state,
-        token: payload.token
+        loggedIn: true
+      }
+
+    case sessionActions.LOGOUT_SUCCESS:
+      return {
+        ...state,
+        loggedIn: false
       }
 
     default:

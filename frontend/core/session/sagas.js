@@ -1,4 +1,3 @@
-import ls from 'local-storage'
 import { push } from 'react-router-redux'
 import { call, fork, put, takeLatest } from 'redux-saga/effects'
 import { startSubmit, stopSubmit } from 'redux-form'
@@ -16,17 +15,27 @@ export function * login ({ payload }) {
     yield put({ type: sessionActions.LOGIN_SUCCESS, payload: { ...data } })
     yield put(stopSubmit(formId))
 
-    ls.set('token', data.token)
-    yield put(push('/'))
+    yield put(push('/app'))
   } catch (err) {
     yield put(stopSubmit(formId, { _error: err.message }))
   }
+}
+
+export function * logout() {
+  yield call(api.logout)
+  yield put({ type: sessionActions.LOGOUT_SUCCESS, payload: {} })
+  yield put(push('/'))
 }
 
 export function * watchLogin () {
   yield takeLatest(sessionActions.LOGIN_REQUEST, login)
 }
 
+export function * watchLogout() {
+  yield takeLatest(sessionActions.LOGOUT_REQUEST, logout)
+}
+
 export const sessionSagas = [
-  fork(watchLogin)
+  fork(watchLogin),
+  fork(watchLogout)
 ]

@@ -15,6 +15,9 @@ module.exports = {
   handler: function *() {
     const { email, password } = this.request.body
     const user = yield User.auth(email, password)
+
+    this.session.userId = user.id
+
     this.body = {
       user: user.format(),
       token: auth.token.sign(user)

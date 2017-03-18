@@ -9,5 +9,8 @@ module.exports = function * () {
     this.state.user = JSON.stringify(user.format())
   }
 
+  // Don't render on api calls
+  if (this.path.indexOf('/api') === 0) {return}
+
   yield this.render('index', webpack)
 }

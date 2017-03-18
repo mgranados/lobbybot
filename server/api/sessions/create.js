@@ -18,9 +18,6 @@ module.exports = {
 
     this.session.userId = user.id
 
-    this.body = {
-      user: user.format(),
-      token: auth.token.sign(user)
-    }
+    this.body = {user: user.format()}
   }
 }

@@ -12,15 +12,15 @@ module.exports = function api (app) {
     const rtr = router()
     rtr.prefix(pfix)
 
+    debug('api')(`Adding resource ${pfix}`)
     forEach(middlewares, mdw => {
       rtr.use(mdw)
     })
 
     forEach(routes, route => {
+      debug('api')(`Added new route [${route.method}]${pfix}${route.path}`)
       rtr.route(route)
     })
-
-    debug('api')(`Added new resource ${pfix}`)
 
     app.use(convert(rtr.middleware()))
   })

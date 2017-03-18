@@ -37,7 +37,7 @@ export default {
 
         if (res.status !== 200) {
           return reject({
-            message: res.body.message || res.text,
+            message: res.body ? res.body.message : res.text,
             status: res.status
           })
         }

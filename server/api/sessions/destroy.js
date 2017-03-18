@@ -1,4 +1,3 @@
-
 module.exports = {
   method: 'delete',
   path: '/',

@@ -9,10 +9,9 @@ export function * login ({ payload }) {
   yield put(startSubmit(formId))
 
   try {
-    const { email, password } = payload
-    const data = yield call(api.login, { email, password })
+    const data = yield call(api.login, payload)
 
-    yield put({ type: sessionActions.LOGIN_SUCCESS, payload: { ...data } })
+    yield put({ type: sessionActions.LOGIN_SUCCESS, payload: data })
     yield put(stopSubmit(formId))
 
     yield put(push('/app'))
@@ -27,6 +26,35 @@ export function * logout() {
   yield put(push('/'))
 }
 
+export function * resetPassword({ payload }) {
+  const formId = 'resetPassword'
+
+  yield put(startSubmit(formId))
+  try {
+    const data = yield call(api.resetPassword, payload)
+
+    yield put({ type: sessionActions.RESET_PASSWORD_SUCCESS, payload: data })
+    yield put(stopSubmit(formId, {}))
+    
+    yield put(push('/app'))
+  } catch (err) {
+    yield put(stopSubmit(formId, { _error: err.message }))
+  }    
+}
+
+export function * requestPassword({ payload }) {
+  const formId = 'requestPassword'
+
+  yield put(startSubmit(formId))
+  try {
+    yield call(api.requestPassword, payload)
+    yield put({ type: sessionActions.REQUEST_PASSWORD_SUCCESS, payload: {success:true} })
+    yield put(stopSubmit(formId))
+  } catch (err) {
+    yield put(stopSubmit(formId, { _error: err.message }))
+  }
+}
+
 export function * watchLogin () {
   yield takeLatest(sessionActions.LOGIN_REQUEST, login)
 }
@@ -35,7 +63,17 @@ export function * watchLogout() {
   yield takeLatest(sessionActions.LOGOUT_REQUEST, logout)
 }
 
+export function * watchResetPassword() {
+  yield takeLatest(sessionActions.RESET_PASSWORD_REQUEST, resetPassword)
+}
+
+export function * watchRequestPassword() {
+  yield takeLatest(sessionActions.REQUEST_PASSWORD_REQUEST, requestPassword)
+}
+
 export const sessionSagas = [
   fork(watchLogin),
-  fork(watchLogout)
+  fork(watchLogout),
+  fork(watchResetPassword),
+  fork(watchRequestPassword)
 ]

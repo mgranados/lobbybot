@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { sessionActions } from 'core/session'
 import LoginForm from 'views/components/LoginForm'
 import styles from './style.css'
+import { Link } from 'react-router'
 
 class Login extends Component {
   render () {
@@ -12,7 +13,11 @@ class Login extends Component {
       <div className={styles.page}>
         <LoginForm
           onSubmit={(values) => login(values)}
-        />
+        >
+          <p className={styles.resetPassword}>
+            <Link to="/request-password">Reset password</Link>
+          </p>
+        </LoginForm>
       </div>
     )
   }

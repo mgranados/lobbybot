@@ -2,16 +2,27 @@ import React from 'react'
 import classNames from 'classnames/bind'
 import { Field, reduxForm } from 'redux-form'
 import styles from './style.css'
+import { Link } from 'react-router'
 
 const cx = classNames.bind(styles)
 
-class LoginForm extends React.Component {
+class RequestPasswordForm extends React.Component {
   render () {
-    const { handleSubmit, error, submitting } = this.props
+    const { handleSubmit, error, submitting, submitSucceeded } = this.props
+
+
+    if(submitSucceeded){
+      return <form className={cx('box', 'form')}>
+        <h5 className='title is-5 has-text-centered'>E-mail sended, please check your inbox.</h5>
+        <Link className="button is-primary" to="/">
+          <span>Back to home</span>
+        </Link>        
+      </form>
+    }
 
     return (
       <form className={cx('box', 'form')} onSubmit={handleSubmit}>
-        <h5 className='title is-5 has-text-centered'>Sign in with your e-mail</h5>
+        <h5 className='title is-5 has-text-centered'>Reset password by e-mail</h5>
 
         <p className='control'>
           <Field
@@ -24,22 +35,12 @@ class LoginForm extends React.Component {
           />
         </p>
 
-        <p className='control'>
-          <Field
-            name='password'
-            component='input'
-            type='password'
-            className='input'
-            placeholder='Password'
-          />
-        </p>
-
         {!error ? null : (
           <span className='help is-danger has-text-centered'>{error}</span>
         )}
 
         <div style={{ textAlign: 'right' }}>
-          <button type='submit' className={cx('button is-primary', { 'is-loading': submitting })}>Log in</button>
+          <button type='submit' className={cx('button is-primary', { 'is-loading': submitting })}>Reset password</button>
         </div>
 
         { this.props.children ? 
@@ -51,6 +52,6 @@ class LoginForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'login'
-})(LoginForm)
+  form: 'requestPassword'
+})(RequestPasswordForm)
 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { Schema } = require('mongoose')
 const { extend } = require('lodash')
+const { v4 } = require('uuid')
 const bcrypt = require('bcrypt')
 const statics = require('./statics')
 const methods = require('./methods')
@@ -22,7 +23,9 @@ const userSchema = new Schema({
   },
   name: {
     type: String
-  }
+  },
+
+  resetPasswordToken:{ type: String, default: v4}
 })
 
 userSchema.pre('save', function (next) {

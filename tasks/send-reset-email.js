@@ -7,16 +7,12 @@ const { User } = require('models')
 const argv = parseArgs(process.argv.slice(2))
 
 module.exports = co.wrap(function *(){
-  if (!argv.password || !argv.email) {
-    throw new Error('email and password are required')
-  }
+  if (!argv.email) {throw new Error('email and password are required')}
 
-  const user = new User({
-    email: argv.email,
-    password: argv.password
-  })
+  const user = yield User.findOne({email: argv.email,})
 
-  yield user.save()
+  if(!user){}
+  yield user.sendResetPasswordEmail()
 
-  console.log('User created:', user.email)
+  console.log('Email send to', user.email)
 })

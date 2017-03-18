@@ -7,10 +7,14 @@ const { forEach } = require('lodash')
 const resouces = requireindex(__dirname, { recursive: false })
 
 module.exports = function api (app) {
-  forEach(resouces, ({ prefix, routes }) => {
+  forEach(resouces, ({ prefix, routes, middlewares }) => {
     const pfix = `/api${prefix}`
     const rtr = router()
     rtr.prefix(pfix)
+
+    forEach(middlewares, mdw => {
+      rtr.use(mdw)
+    })
 
     forEach(routes, route => {
       rtr.route(route)

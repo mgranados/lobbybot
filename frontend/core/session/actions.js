@@ -5,6 +5,9 @@ export const sessionActions = {
 
   LOGOUT_REQUEST: 'LOGOUT_REQUEST',
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
+  SIGNUP_REQUEST: 'SIGNUP_REQUEST',
+  SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',
+
 
   RESET_PASSWORD_REQUEST: 'RESET_PASSWORD_REQUEST',
   RESET_PASSWORD_SUCCESS: 'RESET_PASSWORD_SUCCESS',
@@ -24,6 +27,7 @@ export const sessionActions = {
     payload: {}
   }),
 
+
   resetPassword: ({ password, confirmPassword, token, email }) => ({
     type: sessionActions.RESET_PASSWORD_REQUEST,
     payload: {
@@ -36,6 +40,14 @@ export const sessionActions = {
     payload: {
       email
     }
+  }),
+
+  signUp: ({ screenName, displayName, email, password, passwordConfirmation }) => ({
+    type: sessionActions.SIGNUP_REQUEST,
+    payload: {
+      screenName, displayName, email, password, passwordConfirmation
+    }
   })
+
 }
 

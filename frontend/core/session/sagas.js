@@ -20,6 +20,26 @@ export function * login ({ payload }) {
   }
 }
 
+export function * signUp ({ payload }){
+  const formId = 'signUp'
+  yield put(startSubmit(formId))
+
+  try {
+    const { screenName, displayName, email, password } = payload
+
+    const data = yield call(api.signUp, { screenName, displayName, email, password }) 
+
+    yield put({ type: sessionActions.SIGNUP_SUCCESS, payload: { ...data } })
+    yield put(stopSubmit(formId))
+
+    //TODO HACER LOGIN CON EL RECIEN CREADO 
+    //REDIRIGIR A LA APP
+    //yield put(push('/app))
+  } catch (err) {
+    yield put(stopSubmit(formId, { _error: err.message }))
+  }
+}
+
 export function * logout() {
   yield call(api.logout)
   yield put({ type: sessionActions.LOGOUT_SUCCESS, payload: {} })
@@ -71,9 +91,14 @@ export function * watchRequestPassword() {
   yield takeLatest(sessionActions.REQUEST_PASSWORD_REQUEST, requestPassword)
 }
 
+export function * watchSignUp() {
+  yield takeLatest(sessionActions.SIGNUP_REQUEST, signUp)
+}
+
 export const sessionSagas = [
   fork(watchLogin),
   fork(watchLogout),
   fork(watchResetPassword),
   fork(watchRequestPassword)
+  fork(watchSignUp)
 ]

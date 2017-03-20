@@ -15,6 +15,10 @@ export default {
 
   requestPassword: (data) => {
     return http.post('/sessions/request-password', data)
-  }  
+  },
+
+  signUp: (data) => {
+    return http.post('/register', data)
+  }
 }
 

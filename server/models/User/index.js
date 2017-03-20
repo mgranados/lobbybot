@@ -25,7 +25,14 @@ const userSchema = new Schema({
     type: String
   },
 
-  resetPasswordToken:{ type: String, default: v4}
+  resetPasswordToken:{ type: String, default: v4},
+  screenName: {
+    type: String,
+    unique: true
+  },
+  displayName: {
+    type: String
+  }
 })
 
 userSchema.pre('save', function (next) {

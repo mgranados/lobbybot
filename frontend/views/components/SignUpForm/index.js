@@ -1,13 +1,23 @@
 import React from 'react'
 import classNames from 'classnames/bind'
-import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import styles from './style.css'
 
 const cx = classNames.bind(styles)
+const formId = 'signUp'
 
 class SignUpForm extends React.Component {
   render () {
-    const { handleSubmit, error, submitting } = this.props
+    const { handleSubmit, error, submitting, password, confirmPassword } = this.props
+    var hasError = false, isEmpty = false
+    if (!confirmPassword){
+      hasError = false
+    } else if(password !== confirmPassword){
+      hasError = true
+    }
+
+    if(!confirmPassword){ isEmpty = true }
 
     return (
       <form className={cx('box', 'form')} onSubmit={handleSubmit}>
@@ -58,9 +68,9 @@ class SignUpForm extends React.Component {
 
         <p className='control'>
           <Field
-            name='passwordConfirmation'
+            name='confirmPassword'
             type='password'
-            className='input'
+            className={cx('input', { 'is-danger': hasError })}
             component='input'
             placeholder='Password Confirmation'
             required
@@ -72,14 +82,27 @@ class SignUpForm extends React.Component {
         )}
 
         <div style={{ textAlign: 'right' }}>
-          <button type='submit' className={cx('button is-primary', { 'is-loading': submitting })}>Sign up</button>
+          { !hasError && !isEmpty ?
+          <button type='submit' className={cx('button is-primary', { 'is-loading': submitting })}>Sign up</button> :
+          <button type='submit' className='button is-primary' disabled>Sign Up</button>
+          }
         </div>
       </form>
     )
   }
 }
 
-export default reduxForm({
-  form: 'signUp'
+SignUpForm = reduxForm({
+  form: formId
 })(SignUpForm)
 
+const selector = formValueSelector(formId)
+
+SignUpForm = connect(state => {
+  return { 
+    password: selector(state, 'password'),
+    confirmPassword: selector(state, 'confirmPassword')
+  }
+})(SignUpForm)
+
+export default SignUpForm

@@ -32,9 +32,8 @@ export function * signUp ({ payload }){
     yield put({ type: sessionActions.SIGNUP_SUCCESS, payload: { ...data } })
     yield put(stopSubmit(formId))
 
-    //TODO HACER LOGIN CON EL RECIEN CREADO 
-    //REDIRIGIR A LA APP
-    //yield put(push('/app))
+    yield put(push('/app'))
+
   } catch (err) {
     yield put(stopSubmit(formId, { _error: err.message }))
   }
@@ -99,6 +98,6 @@ export const sessionSagas = [
   fork(watchLogin),
   fork(watchLogout),
   fork(watchResetPassword),
-  fork(watchRequestPassword)
+  fork(watchRequestPassword),
   fork(watchSignUp)
 ]

@@ -10,6 +10,7 @@ import Users from './pages/Users'
 import Login from './pages/Login'
 import ResetPassword from './pages/ResetPassword'
 import RequestPassword from './pages/RequestPassword'
+import SignUp from './pages/SignUp'
 
 export default function routes (store) {
   const isAuthenticated = ({ location }, replace) => {
@@ -34,6 +35,7 @@ export default function routes (store) {
         <IndexRoute component={Home} />
         <Route path='/about' component={About} />
         <Route path='/login' component={Login} />
+        <Route path='/sign-up' component={SignUp} />
         <Route path='/request-password' component={RequestPassword} />
 
         <Route path='/emails/reset-password' component={ResetPassword} />

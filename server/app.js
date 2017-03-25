@@ -6,8 +6,10 @@ const convert = require('koa-convert')
 const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 const views = require('koa-nunjucks-next')
+const flash = require('koa-flash')
 const path = require('path')
 const api = require('./api')
+const routers = require('./routers')
 const { render, errorHandler } = require('./middlewares')
 const config = require('../config')
 
@@ -30,6 +32,7 @@ app.use(convert(session({
     maxAge: 14 * 24 * 60 * 60 * 1000 // 14 days in ms
   }
 })))
+app.use(convert(flash()))
 
 // Logger
 if (env !== 'test') {
@@ -41,6 +44,9 @@ app.use(convert(errorHandler))
 
 // api
 api(app)
+
+// routers
+routers(app)
 
 // frontend
 app.use(convert(render))

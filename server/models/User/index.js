@@ -9,30 +9,15 @@ const methods = require('./methods')
 const SALT_WORK_FACTOR = process.env.SALT_WORK_FACTOR
 
 const userSchema = new Schema({
-  id: {
-    type: String
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
-  },
-  password: {
-    type: String
-  },
-  name: {
-    type: String
-  },
+  name: { type: String },
+  password: { type: String },
+  email: { type: String, required: true, unique: true, trim: true },
+  validEmail: {type: Boolean, default: false},
 
+  screenName: { type: String, unique: true },
+  displayName: { type: String },
+  
   resetPasswordToken:{ type: String, default: v4},
-  screenName: {
-    type: String,
-    unique: true
-  },
-  displayName: {
-    type: String
-  }
 })
 
 userSchema.pre('save', function (next) {

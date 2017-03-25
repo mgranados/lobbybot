@@ -4,5 +4,7 @@ module.exports = function * (next) {
   } catch (err) {
     this.body = { message: err.message }
     this.status = err.status || 500
+
+    console.error('=>', err)
   }
 }

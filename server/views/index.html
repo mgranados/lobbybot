@@ -10,12 +10,15 @@
   {% endif %}
 </head>
 <body>
-  <div id="app" style="height: 100%;" />
+  <div id="app" style="height: 100%;"></div>
+  <script >
   {% if user %}
-    <script >
       window.user = {{ user | safe }} 
-    </script>
   {% endif %}
+  {% if flash %}
+      window.flash = {{ flash | safe }} 
+  {% endif %}
+  </script>
   <script type="text/javascript" src="{{outputPublicPath}}{{outputFilename}}"></script>
 </body>
 </html>

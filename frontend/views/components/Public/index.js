@@ -65,9 +65,9 @@ export default class Public extends Component {
               <Link className="button" to="/login">
                 <span>Login</span>
               </Link>
-              <a className="button is-primary" href="/sign-up">
+              <Link className="button is-primary" to="/sign-up">
                 <span>Sign up</span>
-              </a>
+              </Link>
             </span>
           </div>
         </nav>

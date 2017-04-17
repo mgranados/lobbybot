@@ -19,12 +19,12 @@ module.exports = {
     console.log(screenName, displayName, email, password)
 
     const user = yield User.register(screenName, displayName, email, password)
-
+    yield user.sendValidationEmail()
+    
     this.session.userId = user.id
 
     this.body = {
       user: user.format()
     }
-
   }
 }

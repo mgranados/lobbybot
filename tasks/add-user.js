@@ -1,12 +1,13 @@
-// node tasks/load add-user --email archr@app.com --password foobar
-const parseArgs = require('minimist')
-const co = require('co')
+// node tasks/add-user --email archr@app.com --password foobar
+require('../config')
+require('server/databases/mongo')
 
-const { User } = require('models')
+const { User } = require('server/models')
+const Task = require('server/lib/task')
 
-const argv = parseArgs(process.argv.slice(2))
+const task = new Task(function * (argv) {
+  console.log('=>', argv)
 
-module.exports = co.wrap(function *(){
   if (!argv.password || !argv.email) {
     throw new Error('email and password are required')
   }
@@ -18,5 +19,12 @@ module.exports = co.wrap(function *(){
 
   yield user.save()
 
-  console.log('User created:', user.email)
+  return user
 })
+
+if (require.main === module) {
+  task.setCliHandlers()
+  task.run()
+} else {
+  module.exports = task
+}

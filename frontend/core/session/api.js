@@ -19,6 +19,9 @@ export default {
 
   signUp: (data) => {
     return http.post('/register', data)
+  },
+
+  getCurrentUser: () => {
+    return http.get('/sessions/me')
   }
 }
-

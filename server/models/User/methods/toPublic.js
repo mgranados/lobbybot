@@ -1,8 +1,7 @@
-module.exports = function format () {
+module.exports = function * toPublic () {
   return {
     uuid: this.uuid,
     name: this.name,
-    email: this.email,
     validEmail: this.validEmail
   }
 }

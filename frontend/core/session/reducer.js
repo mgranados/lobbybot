@@ -1,10 +1,6 @@
 import { sessionActions } from './actions'
 
-export const initialState = {
-  loggedIn: !!window.user
-}
-
-export function sessionReducer (state = initialState, { payload, type }) {
+export function sessionReducer (state = {}, { payload, type }) {
   switch (type) {
     case sessionActions.LOGIN_SUCCESS:
     case sessionActions.SIGNUP_SUCCESS:
@@ -24,6 +20,22 @@ export function sessionReducer (state = initialState, { payload, type }) {
       return {
         ...state,
         loggedIn: false
+      }
+
+    case sessionActions.GET_CURRENT_USER_SUCCESS:
+      return {
+        ...state,
+        loggedIn: payload.loggedIn,
+        loaded: true,
+        loadError: null,
+        currentUser: payload.user
+      }
+
+    case sessionActions.GET_CURRENT_USER_FAILED:
+      return {
+        ...state,
+        loaded: true,
+        loadError: payload
       }
 
     default:

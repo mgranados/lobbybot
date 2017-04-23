@@ -5,9 +5,13 @@ export const sessionActions = {
 
   LOGOUT_REQUEST: 'LOGOUT_REQUEST',
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
+
   SIGNUP_REQUEST: 'SIGNUP_REQUEST',
   SIGNUP_SUCCESS: 'SIGNUP_SUCCESS',
 
+  GET_CURRENT_USER_REQUEST: 'GET_CURRENT_USER_REQUEST',
+  GET_CURRENT_USER_SUCCESS: 'GET_CURRENT_USER_SUCCESS',
+  GET_CURRENT_USER_FAILED: 'GET_CURRENT_USER_FAILED',
 
   RESET_PASSWORD_REQUEST: 'RESET_PASSWORD_REQUEST',
   RESET_PASSWORD_SUCCESS: 'RESET_PASSWORD_SUCCESS',
@@ -26,7 +30,6 @@ export const sessionActions = {
     type: sessionActions.LOGOUT_REQUEST,
     payload: {}
   }),
-
 
   resetPassword: ({ password, confirmPassword, token, email }) => ({
     type: sessionActions.RESET_PASSWORD_REQUEST,
@@ -47,7 +50,11 @@ export const sessionActions = {
     payload: {
       screenName, displayName, email, password, passwordConfirmation
     }
+  }),
+
+  getCurrentUser: () => ({
+    type: sessionActions.GET_CURRENT_USER_REQUEST,
+    payload: {}
   })
 
 }
-

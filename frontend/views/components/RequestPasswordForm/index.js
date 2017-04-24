@@ -10,13 +10,12 @@ class RequestPasswordForm extends React.Component {
   render () {
     const { handleSubmit, error, submitting, submitSucceeded } = this.props
 
-
-    if(submitSucceeded){
+    if (submitSucceeded) {
       return <form className={cx('box', 'form')}>
         <h5 className='title is-5 has-text-centered'>E-mail sended, please check your inbox.</h5>
-        <Link className="button is-primary" to="/">
+        <Link className='button is-primary' to='/'>
           <span>Back to home</span>
-        </Link>        
+        </Link>
       </form>
     }
 
@@ -43,9 +42,7 @@ class RequestPasswordForm extends React.Component {
           <button type='submit' className={cx('button is-primary', { 'is-loading': submitting })}>Reset password</button>
         </div>
 
-        { this.props.children ? 
-          this.props.children
-        : null}
+        { this.props.children }
       </form>
     )
   }
@@ -54,4 +51,3 @@ class RequestPasswordForm extends React.Component {
 export default reduxForm({
   form: 'requestPassword'
 })(RequestPasswordForm)
-

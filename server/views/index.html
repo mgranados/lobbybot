@@ -12,9 +12,6 @@
 <body>
   <div id="app" style="height: 100%;"></div>
   <script >
-  {% if user %}
-      window.user = {{ user | safe }} 
-  {% endif %}
   {% if flash %}
       window.flash = {{ flash | safe }} 
   {% endif %}

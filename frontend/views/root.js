@@ -1,16 +1,40 @@
 import React from 'react'
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import { Router } from 'react-router'
 import routes from './routes'
 
-function Root ({ history, store }) {
-  return (
-    <Provider store={store}>
-      <Router history={history}>
-        {routes(store)}
-      </Router>
-    </Provider>
-  )
+import { sessionActions } from 'core/session'
+
+class Root extends React.Component {
+  componentDidMount () {
+    const { getCurrentUser } = this.props
+
+    getCurrentUser()
+  }
+
+  render () {
+    const { history, store, loaded, loadError } = this.props
+
+    if (loadError) {
+      return (<div>
+        { loadError.status }:{ loadError.message }
+      </div>)
+    }
+
+    if (!loaded) {
+      return (<div>
+        Loading...
+      </div>)
+    }
+
+    return (
+      <Provider store={store}>
+        <Router history={history}>
+          {routes(store)}
+        </Router>
+      </Provider>
+    )
+  }
 }
 
 Root.propTypes = {
@@ -18,4 +42,19 @@ Root.propTypes = {
   store: React.PropTypes.object.isRequired
 }
 
-export default Root
+const mapStateToProps = function (state) {
+  return {
+    loaded: state.session.loaded,
+    loadError: state.session.loadError,
+    currentUser: state.session.currentUser
+  }
+}
+
+const mapDispatchToProps = {
+  getCurrentUser: sessionActions.getCurrentUser
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Root)

@@ -7,10 +7,9 @@ const session = require('koa-generic-session')
 const redisStore = require('koa-redis')
 const views = require('koa-nunjucks-next')
 const flash = require('koa-flash')
-const path = require('path')
 const api = require('./api')
 const routers = require('./routers')
-const { render, errorHandler } = require('./middlewares')
+const { render, errorHandler, getRequestData } = require('./middlewares')
 const config = require('../config')
 
 const { webpack, server, env } = config
@@ -41,6 +40,9 @@ if (env !== 'test') {
 
 // Error handler
 app.use(convert(errorHandler))
+
+// Get Request data
+app.use(convert(getRequestData))
 
 // api
 api(app)

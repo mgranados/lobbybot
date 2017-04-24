@@ -15,7 +15,7 @@ class Login extends Component {
           onSubmit={(values) => login(values)}
         >
           <p className={styles.resetPassword}>
-            <Link to="/request-password">Reset password</Link>
+            <Link to='/request-password'>Reset password</Link>
           </p>
         </LoginForm>
       </div>

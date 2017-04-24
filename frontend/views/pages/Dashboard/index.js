@@ -2,8 +2,12 @@ import React from 'react'
 import classNames from 'classNames/bind'
 import { isEmpty } from 'lodash'
 
+import styles from './style.css'
+
+const cx = classNames.bind(styles)
+
 export default class Dashboard extends React.Component {
-  constructor() {
+  constructor () {
     super()
 
     this.state = {
@@ -11,37 +15,37 @@ export default class Dashboard extends React.Component {
     }
   }
 
-  clearFlash(){
-    this.setState({flash:null})
+  clearFlash () {
+    this.setState({flash: null})
   }
 
-  render() {
+  render () {
     var flashEl
-    if(!isEmpty(this.state.flash)){
+    if (!isEmpty(this.state.flash)) {
       const flash = this.state.flash
-      flashEl = (<article className={classNames('message', flash.className)}>
-        <div className="message-header">
+      flashEl = (<article className={cx('message', flash.className)}>
+        <div className='message-header'>
           <p>{flash.header}</p>
-          <button className="delete" onClick={()=>this.clearFlash()}></button>
+          <button className='delete' onClick={() => this.clearFlash()} />
         </div>
-        <div className="message-body">
+        <div className='message-body'>
           {flash.body}
         </div>
       </article>)
     }
 
     var body
-    if(window.user && !window.user.validEmail){
-      body = (<article className="message is-warning">
-        <div className="message-header">
+    if (window.user && !window.user.validEmail) {
+      body = (<article className='message is-warning'>
+        <div className='message-header'>
           <p>Validate your email</p>
-          <button className="delete"></button>
+          <button className='delete' />
         </div>
-        <div className="message-body">
+        <div className='message-body'>
           Please validate your email before using the app
         </div>
       </article>)
-    }else{
+    } else {
       body = (<div>
         Dashboard
       </div>)

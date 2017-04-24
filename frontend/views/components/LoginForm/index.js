@@ -42,9 +42,7 @@ class LoginForm extends React.Component {
           <button type='submit' className={cx('button is-primary', { 'is-loading': submitting })}>Log in</button>
         </div>
 
-        { this.props.children ? 
-          this.props.children
-        : null}
+        { this.props.children }
       </form>
     )
   }
@@ -53,4 +51,3 @@ class LoginForm extends React.Component {
 export default reduxForm({
   form: 'login'
 })(LoginForm)
-

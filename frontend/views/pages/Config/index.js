@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Users extends Component {
+export default class Config extends Component {
   render () {
     return (
       <div>
-        Usuarios
+        Configuración de Hotel
       </div>
     )
   }

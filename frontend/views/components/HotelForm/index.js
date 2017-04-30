@@ -81,7 +81,7 @@ class HotelForm extends React.Component {
             />
           </p>
         </div>
-        <button type='submit' className={cx('button is-primary')}>Crear hotel</button>
+        <button type='submit' className={cx('button is-primary')}>{this.props.submitLabel}</button>
       </form>
     )
   }

@@ -7,27 +7,40 @@ class UpdateHotel extends Component {
 
   componentDidMount(){
     const { uuid } = this.props.params
-    const { fetchHotelDetails, currentHotel } = this.props
+    const { fetchHotel, currentHotel } = this.props
 
-    if (!currentHotel) {
-      fetchHotelDetails({hotelUUID: uuid})
-    }
+    fetchHotel({uuid})
   }
 
   render () {
-    const {UpdateHotel, hotel} = this.props
+    const {updateHotel, hotel} = this.props
     const { currentHotel } = hotel
     let {initialValues} = this.props
 
     if(currentHotel){
-      console.log("current hotel =>", this.props)
+      initialValues = {
+        initialValues: {
+          name: currentHotel.name,
+          checkIn: currentHotel.checkIn,
+          checkOut: currentHotel.checkOut,
+          lat: currentHotel.lat,
+          lng: currentHotel.lng,
+          wifiNetwork: currentHotel.wifiNetwork,
+          wifiPassword: currentHotel.wifiPassword,
+          roomsAvailable: currentHotel.roomsAvailable
+        }
+      }
+      console.log("current hotel =>", this.props.hotel)
     }
 
     return (
       <div>
         Actualizar Hotel
         <br/>
-        <HotelForm onSubmit={(values) => createHotel(values)} />
+        <HotelForm {...initialValues} submitLabel="Actualizar Hotel" onSubmit={(values) => {
+          values.uuid = currentHotel.uuid
+          updateHotel(values)
+        }} />
       </div>
     )
   }
@@ -38,7 +51,7 @@ const mapStateToProps = function (state) {
 }
 
 const mapDispatchToProps = {
-  fetchHotelDetails: hotelActions.fetchHotelDetails,
+  fetchHotel: hotelActions.fetchHotel,
   updateHotel: hotelActions.updateHotel
 }
 

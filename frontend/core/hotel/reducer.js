@@ -8,6 +8,17 @@ export function hotelReducer (state = {}, { payload, type }) {
         hotel: payload.hotel
       }
 
+    case hotelActions.HOTEL_FETCH_SUCCESS:
+      return {
+        ...state,
+        currentHotel: payload.hotel
+      }
+    case hotelActions.HOTEL_UPDATE_SUCCESS:
+      return {
+        ...state,
+        currentHotel: payload.hotel
+      }
+
     default:
       return state
   }

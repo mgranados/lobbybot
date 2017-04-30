@@ -10,7 +10,7 @@ class CreateHotel extends Component {
       <div>
         Crear Hotel
         <br/>
-        <HotelForm onSubmit={(values) => createHotel(values)} />
+        <HotelForm submitLabel="Crear Hotel" onSubmit={(values) => createHotel(values)} />
       </div>
     )
   }

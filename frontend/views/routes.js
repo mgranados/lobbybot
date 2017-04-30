@@ -7,7 +7,8 @@ import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
 import About from './pages/About'
 import Users from './pages/Users'
-import Config from './pages/Config'
+import CreateHotel from './pages/CreateHotel'
+import UpdateHotel from './pages/UpdateHotel'
 import Login from './pages/Login'
 import ResetPassword from './pages/ResetPassword'
 import RequestPassword from './pages/RequestPassword'
@@ -20,12 +21,6 @@ export default function routes (store) {
     if (!session.loggedIn && location.pathname.indexOf('app') >= 0) {
       replace({
         pathname: '/login'
-      })
-    }
-
-    if (session.loggedIn && location.pathname.indexOf('app') === -1) {
-      replace({
-        pathname: '/app'
       })
     }
   }
@@ -44,10 +39,10 @@ export default function routes (store) {
 
       <Route path='/app' component={App} onEnter={isAuthenticated}>
         <IndexRoute component={Dashboard} />
-        <Route path='/configuracion' component={Config} />
+        <Route path='/hotels/create' component={CreateHotel} />
+        <Route path='/hotels/:uuid/update' component={UpdateHotel} />
         <Route path='/usuarios' component={Users} />
         <Route path='/users' component={Users} />
-        <Route path='/hotels' component={Users} />
       </Route>
     </Route>
   )

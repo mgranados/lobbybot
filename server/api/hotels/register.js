@@ -8,9 +8,9 @@ module.exports = {
     type: 'json'
   },
   handler: function *() {
-    const { name, checkIn, checkOut, menuImage, wifiPassword, googleMaps, roomsAvailable, weather, places } = this.request.body
+    const { name, checkIn, checkOut, wifiNetwork, wifiPassword, lat, lng, roomsAvailable } = this.request.body
 
-    const hotel = yield Hotel.create({name, checkIn, checkOut, menuImage, wifiPassword, googleMaps, roomsAvailable, weather, places})
+    const hotel = yield Hotel.create({name, checkIn, checkOut, wifiNetwork, wifiPassword, lat, lng, roomsAvailable})
 
     this.body = {
       hotel: hotel

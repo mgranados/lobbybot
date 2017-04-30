@@ -8,15 +8,13 @@ const methods = require('./methods')
 const hotelSchema = new Schema({
   uuid: {type: String, default: v4},
   checkIn: { type: String },
-  name: { type: String },
   checkOut: { type: String },
-  menuImage: { type: String },
+  name: { type: String },
+  wifiNetwork: {type: String},
   wifiPassword: {type: String},
-  googleMaps: {type: String},
-  roomsAvailable: {type: String},
-  weather: {type: String},
-  places: {type: String}
-
+  lat: {type: String},
+  lng: {type: String},
+  roomsAvailable: {type: String}
 })
 
 module.exports = mongoose.model('Hotel', hotelSchema)

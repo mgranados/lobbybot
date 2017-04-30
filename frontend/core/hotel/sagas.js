@@ -20,10 +20,34 @@ export function * createHotel ({ payload }) {
   }
 }
 
+export function * fetchHotel ({ payload }) {
+    const data = yield call(api.fetchHotel, payload)
+    console.log("data =>", data)
+
+    yield put({ type: hotelActions.HOTEL_FETCH_SUCCESS, payload: data })
+}
+
+export function * updateHotel ({ payload }) {
+    const data = yield call(api.updateHotel, payload)
+    console.log("data =>", data)
+    yield put({ type: hotelActions.HOTEL_UPDATE_SUCCESS, payload: data })
+}
+
 export function * watchCreateHotel () {
   yield takeLatest(hotelActions.HOTEL_CREATION_REQUEST, createHotel)
 }
 
+export function * watchFetchHotel () {
+  yield takeLatest(hotelActions.HOTEL_FETCH_REQUEST, fetchHotel)
+}
+
+export function * watchUpdateHotel () {
+  yield takeLatest(hotelActions.HOTEL_UPDATE_REQUEST, updateHotel)
+}
+
 export const hotelSagas = [
-  fork(watchCreateHotel)
+  fork(watchCreateHotel),
+  fork(watchFetchHotel),
+  fork(watchUpdateHotel)
+
 ]

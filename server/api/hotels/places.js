@@ -22,7 +22,7 @@ module.exports = {
               'elements': [
                 {
                   'title': 'Mina de Edén',
-                  'image_url': 'https://foursquare.com/v/mina-el-ed%C3%A9n/4c92791cf600236a7c5fbd32?openPhotoId=51eafeb5498ee2a4d355e5',
+                  'image_url': 'https://igx.4sqi.net/img/general/200x200/41169631_52eiYAhl3HPd8jMx8zgDS0xspWvSP4zJ-zw4vuIql1g.jpg',
                   'subtitle': 'Atraccion Turistica',
                   'buttons': [
                     {
@@ -34,7 +34,7 @@ module.exports = {
                 },
                 {
                   'title': 'Teleferico estación el grillo',
-                  'image_url': 'https://foursquare.com/v/teleferico-estacion-el-grillo/4bb3728d715eef3b1f5286bb?openPhotoId=4fca40c4e4b04ba0d0ecf0cc',
+                  'image_url': 'https://igx.4sqi.net/img/general/200x200/Z8AXLSMwy51KVa7ulM1y3GHvyLbhfZufaddafj_spNc.jpg',
                   'subtitle': 'Atraccion Turistica',
                   'buttons': [
                     {
@@ -45,7 +45,7 @@ module.exports = {
                   ]
                 }, {
                   'title': 'La Mina Club',
-                  'image_url': 'https://foursquare.com/v/teleferico-estacion-el-grillo/4bb3728d715eef3b1f5286bb?openPhotoId=4fca40c4e4b04ba0d0ecf0cc',
+                  'image_url': 'https://igx.4sqi.net/img/general/200x200/21396293_jfpU3b5OrUQcBC6hHfpHasgUc_shA5i4RuGfKIlzZ54.jpg',
                   'subtitle': 'Antro',
                   'buttons': [
                     {

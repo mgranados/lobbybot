@@ -3,13 +3,13 @@ import HotelForm from 'views/components/HotelForm'
 import { hotelActions } from 'core/hotel'
 import { connect } from 'react-redux'
 
-class Config extends Component {
+class CreateHotel extends Component {
   render () {
     const {createHotel} = this.props
     debugger
     return (
       <div>
-        Configuración de Hotel
+        Crear Hotel
         <br/>
         <HotelForm onSubmit={(values) => createHotel(values)} />
       </div>
@@ -28,4 +28,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Config)
+)(CreateHotel)

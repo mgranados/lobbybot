@@ -24,7 +24,7 @@ class SignUpForm extends React.Component {
         <h5 className='title is-5 has-text-centered'>Sign up with your e-mail</h5>
 
         <p className='control'>
-          <Field 
+          <Field
             name='screenName'
             className='input'
             component='input'
@@ -34,7 +34,7 @@ class SignUpForm extends React.Component {
         </p>
 
         <p className='control'>
-          <Field 
+          <Field
             name='displayName'
             className='input'
             placeholder='Name'
@@ -99,7 +99,7 @@ SignUpForm = reduxForm({
 const selector = formValueSelector(formId)
 
 SignUpForm = connect(state => {
-  return { 
+  return {
     password: selector(state, 'password'),
     confirmPassword: selector(state, 'confirmPassword')
   }

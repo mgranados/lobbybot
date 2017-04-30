@@ -1,13 +1,31 @@
 import React, { Component } from 'react'
+import HotelForm from 'views/components/HotelForm'
 import { hotelActions } from 'core/hotel'
 import { connect } from 'react-redux'
 
-class ListHotels extends Component {
+class UpdateHotel extends Component {
+
+  componentDidMount(){
+    const { uuid } = this.props.params
+    const { fetchHotelDetails, currentHotel } = this.props
+
+    if (!currentHotel) {
+      fetchHotelDetails({hotelUUID: uuid})
+    }
+  }
+
   render () {
-    const {createHotel} = this.props
+    const {UpdateHotel, hotel} = this.props
+    const { currentHotel } = hotel
+    let {initialValues} = this.props
+
+    if(currentHotel){
+      console.log("current hotel =>", this.props)
+    }
+
     return (
       <div>
-        Crear Hotel
+        Actualizar Hotel
         <br/>
         <HotelForm onSubmit={(values) => createHotel(values)} />
       </div>
@@ -16,14 +34,16 @@ class ListHotels extends Component {
 }
 
 const mapStateToProps = function (state) {
-    return { currentUser: state.session.currentUser }
+  return {hotel: state.hotel}
 }
 
 const mapDispatchToProps = {
-  createHotel: hotelActions.createHotel
+  fetchHotelDetails: hotelActions.fetchHotelDetails,
+  updateHotel: hotelActions.updateHotel
 }
+
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ListHotels)
+)(UpdateHotel)

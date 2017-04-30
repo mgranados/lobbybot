@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 class CreateHotel extends Component {
   render () {
     const {createHotel} = this.props
-    debugger
     return (
       <div>
         Crear Hotel

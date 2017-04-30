@@ -30,13 +30,11 @@ class UpdateHotel extends Component {
           roomsAvailable: currentHotel.roomsAvailable
         }
       }
-      console.log("current hotel =>", this.props.hotel)
     }
 
     return (
       <div>
-        Actualizar Hotel
-        <br/>
+        <h2>Configuración de hotel</h2>
         <HotelForm {...initialValues} submitLabel="Actualizar Hotel" onSubmit={(values) => {
           values.uuid = currentHotel.uuid
           updateHotel(values)

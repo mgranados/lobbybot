@@ -8,6 +8,7 @@ const methods = require('./methods')
 const hotelSchema = new Schema({
   uuid: {type: String, default: v4},
   checkIn: { type: String },
+  name: { type: String },
   checkOut: { type: String },
   menuImage: { type: String },
   wifiPassword: {type: String},

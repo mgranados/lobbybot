@@ -11,8 +11,10 @@ module.exports = {
       checkOut: hotel.checkOut
     }
 
-    this.body = {
-      schedule: data
-    }
+    this.body = [
+        {
+          text: `El check-in es a las ${data.checkIn} y el check-out es a las ${data.checkOut}`
+        }
+    ]
   }
 }

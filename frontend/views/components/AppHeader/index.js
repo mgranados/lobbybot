@@ -10,7 +10,7 @@ class Header extends React.Component {
         <div className='container'>
           <div className='nav-left'>
             <Link className='nav-item is-tab' to='/app'>Home</Link>
-            <Link className='nav-item is-tab' to='/hotels/create'>Crear hotel</Link>
+            <Link className='nav-item is-tab' to='/hotels/6e8b5e58-0e46-41f8-af93-bc258890576b/update'>Configurar Hotel</Link>
             <Link className='nav-item is-tab' to='/usuarios'>Usuarios</Link>
           </div>
 

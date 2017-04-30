@@ -44,6 +44,7 @@ export default function routes (store) {
       <Route path='/app' component={App} onEnter={isAuthenticated}>
         <IndexRoute component={Dashboard} />
         <Route path='/users' component={Users} />
+        <Route path='/hotels' component={Users} />
       </Route>
     </Route>
   )

@@ -6,7 +6,8 @@ const {
   WEBPACK_PORT,
   WEBPACK_PUBLIC_PATH,
   WEBPACK_DIR,
-  USE_DIST
+  USE_DIST,
+  APP_HOST
 } = process.env
 
 const clientUrl = `http://${WEBPACK_HOST}:${WEBPACK_PORT}`
@@ -19,5 +20,6 @@ module.exports = {
   outputPublicPath: useDist ? WEBPACK_PUBLIC_PATH : `${clientUrl}${WEBPACK_PUBLIC_PATH}`,
   outputPath: path.resolve(process.cwd(), WEBPACK_DIR),
   outputFilename: 'bundle.js',
-  cssFilename: 'bundle.css'
+  cssFilename: 'bundle.css',
+  basePath: APP_HOST
 }

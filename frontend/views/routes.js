@@ -46,6 +46,8 @@ export default function routes (store) {
         <IndexRoute component={Dashboard} />
         <Route path='/configuracion' component={Config} />
         <Route path='/usuarios' component={Users} />
+        <Route path='/users' component={Users} />
+        <Route path='/hotels' component={Users} />
       </Route>
     </Route>
   )

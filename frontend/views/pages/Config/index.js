@@ -8,7 +8,7 @@ export default class Config extends Component {
       <div>
         Configuración de Hotel
         <br/>
-        <HotelForm></HotelForm>
+        <HotelForm />
       </div>
     )
   }

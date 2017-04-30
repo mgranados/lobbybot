@@ -22,7 +22,7 @@ class HotelConfig extends React.Component {
           </p>
           <p className='control'>
             <Field
-              name='checkInHour'
+              name='checkIn'
               className='input'
               component='input'
               placeholder='Hora de CheckIn'
@@ -32,7 +32,7 @@ class HotelConfig extends React.Component {
 
           <p className='control'>
             <Field
-              name='CheckOutHour'
+              name='CheckOut'
               className='input'
               component='input'
               placeholder='Hora de CheckOut'
@@ -41,7 +41,7 @@ class HotelConfig extends React.Component {
           </p>
         </div>
 
-        <div className={cx('wifiInfo')}>
+        {/* <div className={cx('wifiInfo')}>
           <p className='control'>
             <Field
               name='wifiNetwork'
@@ -61,11 +61,8 @@ class HotelConfig extends React.Component {
               required
             />
           </p>
-        </div>
-
-        <p className='control'>
-          <ImageDropzone label="Imagen de Menu"></ImageDropzone>
-        </p>
+        </div> */}
+        <button type='submit' className={cx('button is-primary')}>Crear hotel</button>
       </form>
     )
   }

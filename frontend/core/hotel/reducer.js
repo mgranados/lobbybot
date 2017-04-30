@@ -1,6 +1,6 @@
 import { hotelActions } from './actions'
 
-export function sessionReducer (state = {}, { payload, type }) {
+export function hotelReducer (state = {}, { payload, type }) {
   switch (type) {
     case hotelActions.HOTEL_CREATION_SUCCESS:
       return {
